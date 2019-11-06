@@ -6939,55 +6939,27 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   background: linear-gradient(270deg, #e6e6ff 0, #f8fcff 97%, #3e3e3e 22%);
   padding: 0.1rem 1.5rem;
 }
-.movie-nav {
-  display: inline;
-  float: left;
-  width: 98.95833333%;
-  margin-left: 0.52083333%;
-  margin-right: 0.52083333%;
-}
-.movie-nav a {
-  text-decoration: none;
-}
-.movie-nav a:visited {
-  color: #000;
-}
-.movie-nav a:hover {
-  color: #1570b2;
-}
-.movie-nav a {
-  display: inline;
-  float: left;
-  width: 15.625%;
-  margin-left: 0.52083333%;
-  margin-right: 0.52083333%;
-  padding-bottom: 0.8em;
-  text-align: center;
-}
-.movie-table {
-  border-collapse: collapse;
-}
-.movie-table,
-tr {
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 1080px;
-}
-.movie-table tr:nth-child(odd) {
-  background-color: #fafafa;
-}
-.movie-table .first {
-  background-color: #efefef !important;
-}
-.movie-table th,
-.movie-table td {
-  width: 20%;
-  padding: 0.8em;
-  border: 2px solid #f8f8f8;
-  text-align: center;
-}
 pre {
   overflow-x: scroll;
+}
+.ip-result.valid {
+  background: #92ec92;
+  border: 2px solid #35ae35;
+}
+.ip-result {
+  background: #ff6e6e;
+  border: 2px solid #c31818;
+  padding: 0 12px;
+  border-radius: 6px;
+}
+.ip-result p {
+  margin: 12px 0;
+}
+.ip-result code {
+  font-family: inherit;
+  font-weight: 900;
+  border: 0;
+  background: initial;
 }
 /**
   * Style for games.
