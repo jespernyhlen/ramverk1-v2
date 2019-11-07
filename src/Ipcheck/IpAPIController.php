@@ -28,25 +28,23 @@ class IpAPIController implements ContainerInjectableInterface
      * ANY METHOD mountpoint/
      * ANY METHOD mountpoint/index
      *
-     * @return string
+     * @return array
      */
-    public function indexActionGet()
-    { 
-        $request = $this->di->get("request");
-        $ipAddress = $this->di->get("request")->getGet("ip");
-        
-        $IpValidator = new IpValidate();
+    public function indexAction() : array
+    {
+        $ipAddress = $this->di->request->getGet("ip");
+        $isValid = filter_var($ipAddress, FILTER_VALIDATE_IP) ? true : false;
 
-        $isValid = $IpValidator->isValidIp($ipAddress);
-        $protocol = $IpValidator->getProtocol($ipAddress);
-        $domain = $IpValidator->getDomain($ipAddress);
+        if ($isValid) {
+            $protocol = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) ? "IPv4" : "IPv6";
+            $domain = gethostbyaddr($ipAddress);
+        }
 
         $json = [
-            "status" => 200,
             "ipAddress" => $ipAddress,
             "isValid" => $isValid,
-            "protocol" => $protocol,
-            "domain" => $domain,
+            "protocol" => $protocol ?? null,
+            "domain" => $domain ?? null,
         ];
 
         // Deal with the action and return a response.

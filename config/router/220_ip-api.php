@@ -1,11 +1,8 @@
-
- <?php
+<?php
 /**
- * Routes to ease testing.
+ * Route for ip-api
  */
 return [
-
-    // All routes in order
     "routes" => [
         [
             "info" => "Ipcheck.",

@@ -6,6 +6,10 @@
 /** ==============================================================
  * Horisontal grid setup
  */
+.outer-wrap-main {
+    margin: @magicNumber * 2 0;
+}
+
 .inner-wrap {
     #desinax-vgrid.grid(1100px);
 
@@ -18,8 +22,6 @@
     #desinax-vgrid.row();
 }
 
-
-
 /** ==============================================================
  * Header
  */
@@ -28,9 +30,9 @@
 
 }*/
 
-@colorAccentHeader1:  #666;
-@colorAccentHeader2:  #9FB129;
-@fontFamilySiteLogo:  @fontFamilyTimesNewRoman;
+@colorAccentHeader1: #666;
+@colorAccentHeader2: #9fb129;
+@fontFamilySiteLogo: @fontFamilyTimesNewRoman;
 
 // .logo-1 {
 //     top: 55px;
@@ -43,15 +45,15 @@
 // }
 
 .profile {
-     text-align: right;
+    text-align: right;
 
-     .profile-phpbb {
-         font-size: 2em;
-         line-height: 0;
-         position: absolute;
-         top: 21px;
-         right: 60px;
-     }
+    .profile-phpbb {
+        font-size: 2em;
+        line-height: 0;
+        position: absolute;
+        top: 21px;
+        right: 60px;
+    }
 
     .ucp,
     .login {
@@ -91,12 +93,10 @@
     }
 }
 
-
-
 /** --------------------------------------------------------------
  * Navbar(s)
  */
-@import "layout/responsive-menu.less";
+@import 'layout/responsive-menu.less';
 
 .region-navbar {
     #desinax-vgrid.column(@columns);
@@ -108,16 +108,12 @@
 }
 */
 
-
-
 /** --------------------------------------------------------------
  * Breadcrumb
  */
 .region-breadcrumb {
     #desinax-vgrid.column(@columns);
 }
-
-
 
 /** --------------------------------------------------------------
  * Flash area
@@ -126,17 +122,12 @@
     #desinax-vgrid.column(@columns);
 }
 
-
-
 /** --------------------------------------------------------------
 * Columns above and below main
 */
 .region-columns-above,
 .region-columns-below {
-
 }
-
-
 
 /** --------------------------------------------------------------
  * General column elements.
@@ -165,8 +156,6 @@
 .columns {
     .clearfix();
 }
-
-
 
 /** ==============================================================
  * The main content area.
@@ -223,7 +212,6 @@
 }
 
 @media screen and (max-width: 650px) {
-
     .main, // @TODO remove when using new layout from Anax.
     .region-main {
         min-height: initial;
@@ -265,8 +253,6 @@
     }
 }
 
-
-
 /** ==============================================================
  * Sidebar.
  *
@@ -275,8 +261,6 @@
     margin-bottom: @magicNumber * 2;
 }
 
-
-
 /** ==============================================================
  * The footer area.
  *
@@ -284,8 +268,6 @@
 .region-footer {
     #desinax-vgrid.column(@columns);
 }
-
-
 
 /** --------------------------------------------------------------
  * The footer column area.

@@ -5386,7 +5386,7 @@ h4:hover .header-anchor {
 .bullet-list {
   margin-bottom: 24px;
   font-size: 0.875em;
-  line-height: 1.71428571;
+  line-height: 1.95918367;
 }
 .breadcrumb-list li a,
 .bullet-list li a {
@@ -5439,7 +5439,7 @@ a:hover {
 .blog-list .meta-footer,
 .blog-post .meta-footer {
   font-size: 0.875em;
-  line-height: 1.71428571;
+  line-height: 1.95918367;
   font-style: italic;
   color: #666;
 }
@@ -5483,7 +5483,7 @@ a:hover {
 }
 .blog-list h1 {
   font-size: 1.875em;
-  line-height: 1.6;
+  line-height: 1.82857143;
   border-bottom: 1px solid #ccc;
 }
 .blog-list h1 a {
@@ -5605,7 +5605,7 @@ body {
   padding: 0;
   color: #111;
   background-color: #fff;
-  font: 16px/1.5 Verdana, Geneva, sans-serif;
+  font: 14px/1.71428571 Verdana, Geneva, sans-serif;
 }
 h1,
 h2,
@@ -5627,7 +5627,7 @@ h6 img {
 }
 h1 {
   font-size: 2.375em;
-  line-height: 1.26315789;
+  line-height: 1.44360902;
   font-weight: normal;
   border-bottom: 1px solid #666;
   margin-bottom: 23px;
@@ -5645,7 +5645,7 @@ h1 + h2 {
 }
 h2 {
   font-size: 1.875em;
-  line-height: 1.6;
+  line-height: 1.82857143;
   font-weight: normal;
   margin-bottom: 23px;
   border-bottom: 1px solid #ccc;
@@ -5655,7 +5655,7 @@ h2 + h3 {
 }
 h3 {
   font-size: 1.75em;
-  line-height: 1.71428571;
+  line-height: 1.95918367;
   font-weight: normal;
   margin-bottom: 23px;
   border-bottom: 1px solid #eee;
@@ -5665,7 +5665,7 @@ h3 + h4 {
 }
 h4 {
   font-size: 1.5em;
-  line-height: 1;
+  line-height: 1.14285714;
   font-weight: normal;
   margin-bottom: 23px;
   border-bottom: 1px solid #eee;
@@ -5675,7 +5675,7 @@ h4 + h5 {
 }
 h5 {
   font-size: 1.25em;
-  line-height: 1.2;
+  line-height: 1.37142857;
   margin-bottom: 23px;
   border-bottom: 1px solid #EEE;
 }
@@ -5684,7 +5684,7 @@ h5 + h6 {
 }
 h6 {
   font-size: 1.25em;
-  line-height: 1.2;
+  line-height: 1.37142857;
   margin-bottom: 23px;
   border-bottom: 1px solid #EEE;
 }
@@ -5834,7 +5834,7 @@ article table caption,
 .table caption,
 .table2 caption {
   font-size: 0.875em;
-  line-height: 1.71428571;
+  line-height: 1.95918367;
   text-align: left;
   font-style: italic;
 }
@@ -5905,6 +5905,9 @@ img {
 /** ==============================================================
  * Horisontal grid setup
  */
+.outer-wrap-main {
+  margin: 48px 0;
+}
 .inner-wrap {
   margin-right: auto;
   margin-left: auto;
@@ -6927,7 +6930,9 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .rm-default a {
   font-size: 0.9em;
-  padding: 1.25em 0.7em;
+  padding: 1.4em 0.7em;
+  font-weight: 200;
+  letter-spacing: 1.5px;
 }
 .outer-wrap-flash {
   border-bottom: 2px solid #eee;
@@ -6971,8 +6976,8 @@ pre {
 }
 .site-logo-text {
   font-family: MyriadPro-Regular, "Myriad Pro Regular", MyriadPro, 'Myriad Pro', Helvetica, Arial, sans-serif;
-  padding: 0.2em 0.5em;
-  font-size: 31px;
+  padding: 0.6em 0.5em;
+  font-size: 1.6em;
   line-height: 1;
   text-shadow: 1px -1px 1px #eee;
 }

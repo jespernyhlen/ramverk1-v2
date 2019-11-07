@@ -1,5 +1,6 @@
 <?php
 namespace Anax\View;
+
 ?>
 <h4>JSON</h4>
 <form action="./ip-api" method="get">

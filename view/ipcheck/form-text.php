@@ -1,5 +1,6 @@
 <?php
 namespace Anax\View;
+
 ?>
 <h1>IP Koll</h1>
 <h4>Text</h4>

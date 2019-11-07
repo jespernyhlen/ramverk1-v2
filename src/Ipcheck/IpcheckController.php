@@ -31,10 +31,10 @@ class IpcheckController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function indexActionGet()
+    public function indexAction()
     {
         $title = "Validate IP result";
-        $page = $this->di->page;
+        $page = $this->di->get("page");
 
         // Deal with the action and return a response.
         $page->add("ipcheck/form-text", []);
@@ -48,28 +48,26 @@ class IpcheckController implements ContainerInjectableInterface
     public function indexActionPost()
     {
         $title = "Validate IP";
-        $page = $this->di->page;
-        $request = $this->di->get("request");
-        $ipAddress = $request->getPost("ipaddress");
+        $page = $this->di->get("page");
 
-        $IpValidator = new IpValidate();
+        $ipAddress = $this->di->get("request")->getPost("ipaddress");
 
-        $isValid = $IpValidator->isValidIp($ipAddress);
-        $protocol = $IpValidator->getProtocol($ipAddress);
-        $domain = $IpValidator->getDomain($ipAddress);
+        $isValid = filter_var($ipAddress, FILTER_VALIDATE_IP) ? true : false;
 
+        if ($isValid) {
+            $protocol = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) ? "IPv4" : "IPv6";
+            $domain = gethostbyaddr($ipAddress);
+        }
     
         $page->add("ipcheck/result", [
             "ipAddress" => $ipAddress,
             "isValid" => $isValid,
-            "protocol" => $protocol,
-            "domain" => $domain
+            "protocol" => $protocol ?? null,
+            "domain" => $domain ?? null
         ]);
 
         return $page->render([
             "title" => $title
         ]);
     }
-
-    
 }
