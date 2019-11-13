@@ -28,7 +28,6 @@ class IpAPIControllerTest extends TestCase
         // Setup controllerclass
         $this->controller = new IpAPIController();
         $this->controller->setDI($this->di);
-        $di->set("request", "\Anax\Request\Request");
     }
 
     /**
@@ -47,15 +46,15 @@ class IpAPIControllerTest extends TestCase
         ]];
         $this->assertEquals($exp, $res);
 
-         // Test unvalid ip
-         $this->di->get("request")->setGet("ip", "327.44.205.237");
-         $res = $this->controller->indexAction();
-         $exp = [[
-             "ipAddress" => "327.44.205.237",
-             "isValid" => false,
-             "protocol" => null,
-             "domain" => null
-         ]];
-         $this->assertEquals($exp, $res);
+        // Test unvalid ip
+        $this->di->get("request")->setGet("ip", "327.44.205.237");
+        $res = $this->controller->indexAction();
+        $exp = [[
+            "ipAddress" => "327.44.205.237",
+            "isValid" => false,
+            "protocol" => null,
+            "domain" => null
+        ]];
+        $this->assertEquals($exp, $res);
     }
 }

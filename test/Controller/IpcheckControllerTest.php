@@ -28,7 +28,6 @@ class IpcheckControllerTest extends TestCase
         // Setup controllerclass
         $this->controller = new IpcheckController();
         $this->controller->setDI($this->di);
-        $di->set("request", "\Anax\Request\Request");
     }
 
     /**
@@ -57,17 +56,21 @@ class IpcheckControllerTest extends TestCase
      */
     public function testIndexActionPost()
     {
-        $_POST["ipaddress"] = "37.244.205.237";
         // Test valid ip
+        $key = "ipaddress";
+        $value = "37.44.205.237";
+        $this->di->get("request")->setPost($key, $value);
         $res = $this->controller->indexActionPost();
-        $this->assertIsObject($res);
+       
         $this->assertInstanceOf("Anax\Response\Response", $res);
         $this->assertInstanceOf("Anax\Response\ResponseUtility", $res);
         $body = $res->getBody();
-        $this->assertContains("<p><code>37.244.205.237</code> är en validerad IP Address</p>", $body);
+        $this->assertContains("<p><code>37.44.205.237</code> är en validerad IP Address", $body);
 
-        $_POST["ipaddress"] = "37.244.2205.37";
         // Test unvalid ip
+        $key = "ipaddress";
+        $value = "37.244.2205.37";
+        $this->di->get("request")->setPost($key, $value);
         $res = $this->controller->indexActionPost();
         $this->assertIsObject($res);
         $body = $res->getBody();
