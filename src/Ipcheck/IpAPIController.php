@@ -33,18 +33,14 @@ class IpAPIController implements ContainerInjectableInterface
     public function indexAction() : array
     {
         $ipAddress = $this->di->request->getGet("ip");
-        $isValid = filter_var($ipAddress, FILTER_VALIDATE_IP) ? true : false;
 
-        if ($isValid) {
-            $protocol = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) ? "IPv4" : "IPv6";
-            $domain = gethostbyaddr($ipAddress);
-        }
+        $IpValidator = new IpValidate();
 
         $json = [
             "ipAddress" => $ipAddress,
-            "isValid" => $isValid,
-            "protocol" => $protocol ?? null,
-            "domain" => $domain ?? null,
+            "isValid" => $IpValidator->isValidIp($ipAddress),
+            "protocol" => $IpValidator->getProtocol($ipAddress) ?? null,
+            "domain" => $IpValidator->getDomain($ipAddress) ?? null,
         ];
 
         // Deal with the action and return a response.

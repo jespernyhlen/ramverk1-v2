@@ -49,21 +49,15 @@ class IpcheckController implements ContainerInjectableInterface
     {
         $title = "Validate IP";
         $page = $this->di->get("page");
-
         $ipAddress = $this->di->get("request")->getPost("ipaddress");
 
-        $isValid = filter_var($ipAddress, FILTER_VALIDATE_IP) ? true : false;
-
-        if ($isValid) {
-            $protocol = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) ? "IPv4" : "IPv6";
-            $domain = gethostbyaddr($ipAddress);
-        }
+        $IpValidator = new IpValidate();
     
         $page->add("ipcheck/result", [
             "ipAddress" => $ipAddress,
-            "isValid" => $isValid,
-            "protocol" => $protocol ?? null,
-            "domain" => $domain ?? null
+            "isValid" => $IpValidator->isValidIp($ipAddress),
+            "protocol" => $IpValidator->getProtocol($ipAddress) ?? null,
+            "domain" => $IpValidator->getDomain($ipAddress) ?? null,
         ]);
 
         return $page->render([
