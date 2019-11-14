@@ -82,6 +82,16 @@ class IpValidatorTest extends TestCase
     }
 
     /**
+     * Test the "getProtocol" method no valid ip.
+     */
+    public function testgetProtocolUndefined()
+    {
+        $res = $this->validator->getProtocol("2001:dsadasdasd:85a3:0000:0000:8a2e:0370:7334");
+
+        $this->assertEquals($res, "Undefined");
+    }
+
+    /**
     * Test the "getDomain" method.
     */
    public function testgetDomain()
@@ -107,5 +117,16 @@ class IpValidatorTest extends TestCase
         $res4 = $this->validator->getDomain("20011:DB8:7654:3210:FEDC:BA98:7654:3210");
  
         $this->assertEquals([$res1, $res2, $res3, $res4], [null, null, null, null]);
+    }
+
+    /**
+    * Test the "getDomain" method.
+    */
+    public function testgetUserIp()
+    {
+        // Test valid ip
+        $res = $this->validator->getUserIp();
+ 
+        $this->assertEquals($res, null);
     }
 }

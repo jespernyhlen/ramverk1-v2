@@ -59,6 +59,9 @@ class IpAPIController implements ContainerInjectableInterface
 
             return [$ipInfo];
         }
+        return [[
+            "message" => "Not a valid API route"
+        ]];
     }
 
     /**
@@ -68,17 +71,20 @@ class IpAPIController implements ContainerInjectableInterface
      */
     public function getIpInfo()
     {
-        $IpValidator = $this->IpValidator;
-        $IpGeoInfoModel = $this->IpGeoInfoModel;
-
         $session = $this->di->get("session");
-        $ipAddress = $session->get("ip");
-
-        $ipGeoInfo = $IpGeoInfoModel->getInfo($ipAddress);
-        $ipGeoInfo["isValid"] = $IpValidator->isValidIp($ipAddress);
-        $ipGeoInfo["domain"] = $IpValidator->getDomain($ipAddress);
+        if ($session->has('ip')) {
+            $IpValidator = $this->IpValidator;
+            $IpGeoInfoModel = $this->IpGeoInfoModel;
     
-        return $ipGeoInfo;
+            $ipAddress = $session->get("ip");
+    
+            $ipGeoInfo = $IpGeoInfoModel->getInfo($ipAddress);
+            $ipGeoInfo["isValid"] = $IpValidator->isValidIp($ipAddress);
+            $ipGeoInfo["domain"] = $IpValidator->getDomain($ipAddress);
+        
+            return $ipGeoInfo;
+        }
+        return [];
     }
 }
 

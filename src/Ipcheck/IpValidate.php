@@ -44,7 +44,9 @@
          if (filter_var($IpAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
              return "IPv6";
          }
+         return "Undefined";
      }
+     
 
       /**
       * Return domain of ip-address
@@ -65,6 +67,9 @@
       */
       public function getUserIp()
     {
-        return $_SERVER['SERVER_ADDR'];
+        $request = new \Anax\Request\Request();
+        $servParam = $request->getServer('REMOTE_ADDR');
+        
+        return $servParam;
     }
  }
