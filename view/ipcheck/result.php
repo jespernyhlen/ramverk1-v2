@@ -4,9 +4,7 @@ namespace Anax\View;
 ?>
 <h1>Result</h1>
 
-<p>Result av validering</p>
-
-<div class="ip-result <?= $isValid ? "valid" : "" ?>">
+<div class="ip-result">
 
 <?php if ($isValid) : ?>
     <p><code><?= htmlentities($ipAddress) ?></code> är en validerad IP Address</p>
