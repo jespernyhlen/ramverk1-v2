@@ -72,16 +72,19 @@ class IpAPIController implements ContainerInjectableInterface
     public function getIpInfo()
     {
         $session = $this->di->get("session");
+        $IpValidator = $this->IpValidator;
+        $IpGeoInfoModel = $this->IpGeoInfoModel;
+        $ipGeoInfo = [];
+        
         if ($session->has('ip')) {
-            $IpValidator = $this->IpValidator;
-            $IpGeoInfoModel = $this->IpGeoInfoModel;
-    
             $ipAddress = $session->get("ip");
-    
-            $ipGeoInfo = $IpGeoInfoModel->getInfo($ipAddress);
+            if ($IpValidator->isValidIp($ipAddress)) {
+                $ipGeoInfo = $IpGeoInfoModel->getInfo($ipAddress);
+            }
+            $ipGeoInfo["ipAddress"] = $ipAddress;
             $ipGeoInfo["isValid"] = $IpValidator->isValidIp($ipAddress);
             $ipGeoInfo["domain"] = $IpValidator->getDomain($ipAddress);
-        
+
             return $ipGeoInfo;
         }
         return [];

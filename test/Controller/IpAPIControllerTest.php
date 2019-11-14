@@ -31,6 +31,7 @@ class IpAPIControllerTest extends TestCase
 
         // Initialize controller class
         $this->controller->initialize();
+        $this->di->get("session")->destroy();
     }
 
     
@@ -61,13 +62,6 @@ class IpAPIControllerTest extends TestCase
         $res = $this->controller->indexAction();
         $exp = [[
             "ipAddress" => "327.44.205.237",
-            "protocol" => null,
-            "country" => null,
-            "region" => null,
-            "city" => null,
-            "latitude" => null,
-            "longitude" => null,
-            "openstreetmap_link" => null,
             "isValid" => false,
             "domain" => null
         ]];
@@ -99,6 +93,8 @@ class IpAPIControllerTest extends TestCase
         // Test valid ip
         $res = $this->controller->getIpInfo();
         $exp = [
+            "isValid" => true,
+            "domain" => "182.253.75.237",
             "ipAddress" => "182.253.75.237",
             "protocol" => "ipv4",
             "country" => "Indonesia",
@@ -107,8 +103,6 @@ class IpAPIControllerTest extends TestCase
             "latitude" => -6.173799991607666015625,
             "longitude" => 106.82669830322265625,
             "openstreetmap_link" => "https://www.openstreetmap.org/#map=10/-6.1737999916077/106.82669830322",
-            "isValid" => true,
-            "domain" => "182.253.75.237"
         ];
         $this->assertEquals($exp, $res);
         $session->destroy();
