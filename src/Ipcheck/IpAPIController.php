@@ -25,13 +25,13 @@ class IpAPIController implements ContainerInjectableInterface
     /**
      * @var object $IpValidator class for validating ip address
      * @var object $IpGeoInfoModel class for location info for ip addresses
-     * 
+     *
      */
     private $IpValidator;
     private $IpGeoInfoModel;
 
     /**
-     * set model classes for validation an info 
+     * set model classes for validation an info
      *
      * @return void
      */

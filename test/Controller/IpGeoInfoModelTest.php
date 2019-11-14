@@ -39,6 +39,4 @@ class IpGeoInfoModelTest extends TestCase
 
         $this->assertNotEquals($res["openstreetmap_link"], null);
     }
-
- 
 }

@@ -56,7 +56,6 @@ class IpValidatorTest extends TestCase
         $res4 = $this->validator->isValidIp("20011:DB8:7654:3210:FEDC:BA98:7654:3210");
 
         $this->assertEquals([$res1, $res2, $res3, $res4], [false, false, false, false]);
-
     }
 
     /**
@@ -94,16 +93,16 @@ class IpValidatorTest extends TestCase
     /**
     * Test the "getDomain" method.
     */
-   public function testgetDomain()
-   {
-       // Test valid ip
-       $res1 = $this->validator->getDomain("37.44.205.237");
-       $res2 = $this->validator->getDomain("127.0.0.1");
-       $res3 = $this->validator->getDomain("8.8.8.8");
-       $res4 = $this->validator->getDomain("194.47.129.123");
+    public function testgetDomain()
+    {
+        // Test valid ip
+        $res1 = $this->validator->getDomain("37.44.205.237");
+        $res2 = $this->validator->getDomain("127.0.0.1");
+        $res3 = $this->validator->getDomain("8.8.8.8");
+        $res4 = $this->validator->getDomain("194.47.129.123");
 
-       $this->assertEquals([$res1, $res2, $res3, $res4], ["metro-cust-37-44-205-237.daladatorer.net", "localhost", "dns.google", "abuse.bth.se"]);
-   }
+        $this->assertEquals([$res1, $res2, $res3, $res4], ["metro-cust-37-44-205-237.daladatorer.net", "localhost", "dns.google", "abuse.bth.se"]);
+    }
 
     /**
     * Test the "getDomain" method.

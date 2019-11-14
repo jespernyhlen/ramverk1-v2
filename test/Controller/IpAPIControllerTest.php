@@ -31,7 +31,6 @@ class IpAPIControllerTest extends TestCase
 
         // Initialize controller class
         $this->controller->initialize();
-
     }
 
     
