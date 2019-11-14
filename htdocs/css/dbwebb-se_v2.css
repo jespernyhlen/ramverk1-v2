@@ -6966,6 +6966,9 @@ pre {
   border: 0;
   background: initial;
 }
+#map {
+  height: 500px;
+}
 /**
   * Style for games.
   */

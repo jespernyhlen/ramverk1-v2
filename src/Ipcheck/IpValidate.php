@@ -58,4 +58,13 @@
            }
      }
 
+     /**
+      * Return default ip-address of user
+      *
+      * @return string
+      */
+      public function getUserIp()
+    {
+        return $_SERVER['SERVER_ADDR'];
+    }
  }

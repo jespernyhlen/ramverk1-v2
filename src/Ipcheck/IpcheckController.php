@@ -22,6 +22,24 @@ class IpcheckController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
+    /**
+     * @var object $IpValidator class for validating ip address
+     * @var object $IpGeoInfoModel class for location info for ip addresses
+     * 
+     */
+    private $IpValidator;
+    private $IpGeoInfoModel;
+
+    /**
+     * set model classes for validation an info 
+     *
+     * @return void
+     */
+    public function initialize()
+    {
+        $this->IpValidator = new IpValidate();
+        $this->IpGeoInfoModel = new IpGeoInfoModel();
+    }
 
     /**
      * This is the index method action, it handles:
@@ -33,35 +51,74 @@ class IpcheckController implements ContainerInjectableInterface
      */
     public function indexAction()
     {
-        $title = "Validate IP result";
+        $title = "Validate IP";
         $page = $this->di->get("page");
+        $IpValidator = $this->IpValidator;
+        $IpGeoInfoModel = $this->IpGeoInfoModel;
 
-        // Deal with the action and return a response.
-        $page->add("ipcheck/form-text", []);
-        $page->add("ipcheck/form-json", []);
+        if ($this->di->get("request")->hasGet("ipaddress")) {
+            $session = $this->di->get("session");
+            $session->set("ipaddress", $this->di->get("request")->getGet("ipaddress"));
+            $ipInfo = $this->getIpInfo();
+            $page->add("ipcheck/result", $ipInfo);
+        }
+        $page->add("ipcheck/form-text-geo", [
+            "userIp" => $IpValidator->getuserIp(),
+        ]);
+        $page->add("ipcheck/form-json-geo", []);
 
         return $page->render([
             "title" => $title,
         ]);
     }
 
-    public function indexActionPost()
-    {
-        $title = "Validate IP";
-        $page = $this->di->get("page");
-        $ipAddress = $this->di->get("request")->getPost("ipaddress");
 
-        $IpValidator = new IpValidate();
-    
-        $page->add("ipcheck/result", [
+     /**
+     * Get info for views about ip addresses
+     *
+     * @return array
+     */
+    public function getIpInfo()
+    {
+        $IpValidator = $this->IpValidator;
+        $IpGeoInfoModel = $this->IpGeoInfoModel;
+
+        $session = $this->di->get("session");
+        $ipAddress = $session->get("ipaddress");
+        $geoInfo = $IpGeoInfoModel->getInfo($ipAddress);
+
+        $json = [
             "ipAddress" => $ipAddress,
             "isValid" => $IpValidator->isValidIp($ipAddress),
             "protocol" => $IpValidator->getProtocol($ipAddress) ?? null,
             "domain" => $IpValidator->getDomain($ipAddress) ?? null,
-        ]);
-
-        return $page->render([
-            "title" => $title
-        ]);
+            "country" => $geoInfo['country_name'] ?? null,
+            "city" => $geoInfo['city'] ?? null,
+            "latitude" => $geoInfo['latitude'] ?? null,
+            "longitude" => $geoInfo['longitude'] ?? null,
+            "openstreetmap_link" => $geoInfo['openstreetmap_link'] ?? null,
+        ];
+    
+        return $json;
     }
+
+    // public function indexActionGet()
+    // {
+    //     $title = "Validate IP";
+    //     $page = $this->di->get("page");
+    //     $ipAddress = $this->di->get("request")->getGet("ipaddress");
+
+    //     $IpValidator = new IpValidate();
+    
+    //     $page->add("ipcheck/result", [
+    //         "ipAddress" => $ipAddress,
+    //         "isValid" => $IpValidator->isValidIp($ipAddress),
+    //         "protocol" => $IpValidator->getProtocol($ipAddress) ?? null,
+    //         "domain" => $IpValidator->getDomain($ipAddress) ?? null,
+    //     ]);
+
+    //     return $page->render([
+    //         "title" => $title
+    //     ]);
+    // }
 }
