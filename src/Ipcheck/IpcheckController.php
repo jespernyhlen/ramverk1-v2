@@ -59,6 +59,7 @@ class IpcheckController implements ContainerInjectableInterface
         if ($this->di->get("request")->hasGet("ipaddress")) {
             $session = $this->di->get("session");
             $session->set("ipaddress", $this->di->get("request")->getGet("ipaddress"));
+            
             $ipInfo = $this->getIpInfo();
             $page->add("ipcheck/result", $ipInfo);
         }
@@ -85,21 +86,12 @@ class IpcheckController implements ContainerInjectableInterface
 
         $session = $this->di->get("session");
         $ipAddress = $session->get("ipaddress");
-        $geoInfo = $IpGeoInfoModel->getInfo($ipAddress);
 
-        $json = [
-            "ipAddress" => $ipAddress,
-            "isValid" => $IpValidator->isValidIp($ipAddress),
-            "protocol" => $IpValidator->getProtocol($ipAddress) ?? null,
-            "domain" => $IpValidator->getDomain($ipAddress) ?? null,
-            "country" => $geoInfo['country_name'] ?? null,
-            "city" => $geoInfo['city'] ?? null,
-            "latitude" => $geoInfo['latitude'] ?? null,
-            "longitude" => $geoInfo['longitude'] ?? null,
-            "openstreetmap_link" => $geoInfo['openstreetmap_link'] ?? null,
-        ];
-    
-        return $json;
+        $ipGeoInfo = $IpGeoInfoModel->getInfo($ipAddress);
+        $ipGeoInfo["isValid"] = $IpValidator->isValidIp($ipAddress);
+        $ipGeoInfo["domain"] = $IpValidator->getDomain($ipAddress);
+
+        return $ipGeoInfo;
     }
 
     // public function indexActionGet()

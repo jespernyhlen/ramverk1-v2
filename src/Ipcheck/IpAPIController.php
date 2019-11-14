@@ -56,14 +56,9 @@ class IpAPIController implements ContainerInjectableInterface
             $session = $this->di->get("session");
             $session->set("ip", $this->di->get("request")->getGet("ip"));
             $ipInfo = $this->getIpInfo();
-            
+
             return [$ipInfo];
         }
-
-
-       
-
-        // Deal with the action and return a response.
     }
 
     /**
@@ -78,21 +73,12 @@ class IpAPIController implements ContainerInjectableInterface
 
         $session = $this->di->get("session");
         $ipAddress = $session->get("ip");
-        $geoInfo = $IpGeoInfoModel->getInfo($ipAddress);
 
-        $json = [
-            "ipAddress" => $ipAddress,
-            "isValid" => $IpValidator->isValidIp($ipAddress),
-            "protocol" => $IpValidator->getProtocol($ipAddress) ?? null,
-            "domain" => $IpValidator->getDomain($ipAddress) ?? null,
-            "country" => $geoInfo['country_name'] ?? null,
-            "city" => $geoInfo['city'] ?? null,
-            "latitude" => $geoInfo['latitude'] ?? null,
-            "longitude" => $geoInfo['longitude'] ?? null,
-            "openstreetmap_link" => $geoInfo['openstreetmap_link'] ?? null,
-        ];
+        $ipGeoInfo = $IpGeoInfoModel->getInfo($ipAddress);
+        $ipGeoInfo["isValid"] = $IpValidator->isValidIp($ipAddress);
+        $ipGeoInfo["domain"] = $IpValidator->getDomain($ipAddress);
     
-        return $json;
+        return $ipGeoInfo;
     }
 }
 

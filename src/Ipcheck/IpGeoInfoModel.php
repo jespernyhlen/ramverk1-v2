@@ -42,13 +42,23 @@
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       $res = curl_exec($ch);
       $json = json_decode($res, true);
-      $json["openstreetmap_link"] = null;
-      
-      if ($json['latitude'] && $json['longitude']) {
-        $json["openstreetmap_link"] = "https://www.openstreetmap.org/#map=10/{$json['latitude']}/{$json['longitude']}";
-      }
+     
+      $relevantInfo = [
+        "ipAddress" => $json['ip'],
+        "protocol" => $json['type'] ?? null,
+        "country" => $json['country_name'] ?? null,
+        "region" => $json['region_name'] ?? null,
+        "city" => $json['city'] ?? null,
+        "latitude" => $json['latitude'] ?? null,
+        "longitude" => $json['longitude'] ?? null,
+        "openstreetmap_link" => null,
+    ];
 
-      return $json;
+    if ($relevantInfo['latitude'] && $relevantInfo['longitude']) {
+      $relevantInfo["openstreetmap_link"] = "https://www.openstreetmap.org/#map=10/{$relevantInfo['latitude']}/{$relevantInfo['longitude']}";
+    }
+      
+      return $relevantInfo;
     }
       
  }

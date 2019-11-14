@@ -26,6 +26,10 @@ namespace Anax\View;
   <p><strong>Land:</strong> <?= $country ?></p>
 <?php endif; ?>
 
+<?php if ($region) : ?>
+  <p><strong>Region:</strong> <?= $region ?></p>
+<?php endif; ?>
+
 <?php if ($city) : ?>
   <p><strong>Stad:</strong> <?= $city ?></p>
 <?php endif; ?>
