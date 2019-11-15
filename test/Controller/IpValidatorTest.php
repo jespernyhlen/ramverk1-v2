@@ -123,8 +123,9 @@ class IpValidatorTest extends TestCase
     */
     public function testgetUserIp()
     {
+        $request = $this->di->get("request");
         // Test valid ip
-        $res = $this->validator->getUserIp();
+        $res = $this->validator->getUserIp($request);
  
         $this->assertEquals($res, null);
     }

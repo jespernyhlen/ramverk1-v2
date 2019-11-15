@@ -64,11 +64,18 @@ class IpValidate implements ContainerInjectableInterface
     *
     * @return string
     */
-    public function getUserIp()
+    public function getUserIp($request)
     {
-        $request = new \Anax\Request\Request();
-        $servParam = $request->getServer('REMOTE_ADDR');
-        
-        return $servParam;
+        if (!empty($request->getServer('HTTP_CLIENT_IP'))) {
+            //whether ip is from share internet
+            $ip_address = $request->getServer('HTTP_CLIENT_IP');
+        } elseif (!empty($request->getServer('HTTP_X_FORWARDED_FOR'))) {
+            //whether ip is from proxy
+            $ip_address = $request->getServer('HTTP_X_FORWARDED_FOR');
+        } else {
+            //whether ip is from remote address
+            $ip_address = $request->getServer('REMOTE_ADDR');
+        }
+        return $ip_address;
     }
 }

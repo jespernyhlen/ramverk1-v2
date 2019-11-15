@@ -55,6 +55,7 @@ class IpcheckController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $IpValidator = $this->IpValidator;
         $IpGeoInfoModel = $this->IpGeoInfoModel;
+        $request = $this->di->get("request");
 
         if ($this->di->get("request")->hasGet("ipaddress")) {
             $session = $this->di->get("session");
@@ -64,10 +65,10 @@ class IpcheckController implements ContainerInjectableInterface
             $page->add("ipcheck/result", $ipInfo);
         }
         $page->add("ipcheck/form-text-geo", [
-            "userIp" => $IpValidator->getuserIp(),
+            "userIp" => $IpValidator->getuserIp($request),
         ]);
         $page->add("ipcheck/form-json-geo", [
-            "userIp" => $IpValidator->getuserIp(),
+            "userIp" => $IpValidator->getuserIp($request),
         ]);
 
         return $page->render([
