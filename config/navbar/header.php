@@ -44,6 +44,25 @@ return [
             "title" => "Ip validator",
         ],
         [
+            "text" => "Väder",
+            "url" => "weather",
+            "title" => "Väderinformation",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Webb",
+                        "url" => "weather/web",
+                        "title" => "Sök och visa väderinformation",
+                    ],
+                    [
+                        "text" => "API",
+                        "url" => "weather/api",
+                        "title" => "Väder API",
+                    ]
+                ],
+            ],
+        ],
+        [
             "text" => "Styleväljare",
             "url" => "style",
             "title" => "Välj stylesheet.",

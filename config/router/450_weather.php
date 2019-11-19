@@ -6,7 +6,7 @@ return [
     "routes" => [
         [
             "info" => "Weather.",
-            "mount" => "weather",
+            "mount" => "weather/web",
             "handler" => "\Jen\Weather\WeatherController",
         ],
     ]
