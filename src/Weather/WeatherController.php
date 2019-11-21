@@ -17,21 +17,6 @@ class WeatherController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
-     /**
-     * @var object $WeatherModel class for weatherinfo
-     *
-     */
-    private $WeatherModel;
-
-    /**
-     * Sample initialize
-     *
-     * @return void
-     */
-    public function initialize() : void
-    {
-        $this->WeatherModel = new WeatherModel();
-    }
 
     /**
      * This is the index method action, it handles:
@@ -45,7 +30,7 @@ class WeatherController implements ContainerInjectableInterface
     {
         $title = "Weather info";
         $page = $this->di->get("page");
-        $WeatherModel = $this->WeatherModel;
+        $WeatherModel = $this->di->weather;
 
         $request = $this->di->get("request");
 
@@ -54,15 +39,15 @@ class WeatherController implements ContainerInjectableInterface
 
         if ($this->di->get("request")->hasGet("location")) {
             $convertedLocation = $WeatherModel->convertLocation($request->getGet("location"));
-            if (!empty($convertedLocation)) {
+            if ($convertedLocation["match"]) {
 
                 $weatherInfo["location"] = $convertedLocation;
-                $weatherInfo["weather"] = $this->getWeatherInfo($convertedLocation["latitude"], $convertedLocation["longitude"]);
+                $weatherInfo["weather"] = $WeatherModel->getWeather($convertedLocation["latitude"], $convertedLocation["longitude"]);
+                $weatherInfoPast = $WeatherModel->getWeatherMulti($convertedLocation["latitude"], $convertedLocation["longitude"], 3);
 
-                $weatherInfoPast["pastweather"] = $this->getWeatherInfoPast($convertedLocation["latitude"], $convertedLocation["longitude"]);
                 $page->add("weather/location", ["location" => $weatherInfo["location"]]);
                 $page->add("weather/result", ["weatherinfo" => $weatherInfo]);
-                $page->add("weather/resultpast", ["weatherinfo" => $weatherInfoPast]);
+                $page->add("weather/resultpast", ["weatherinfo" => $weatherInfoPast["data"]]);
             } else {
                 $page->add("weather/badresult", []);
             }
@@ -71,34 +56,5 @@ class WeatherController implements ContainerInjectableInterface
         return $page->render([
             "title" => $title,
         ]);
-    }
-
-    /**
-     * Get weather next 7 days
-     *
-     * @return array
-     */
-    public function getWeatherInfo($lat, $long)
-    {
-        $WeatherModel = $this->WeatherModel;
-        $weatherInfo = $WeatherModel->getWeather($lat, $long);
-            // var_dump($weatherInfo["daily"]["data"]);
-
-        return $weatherInfo;
-
-    }
-
-    /**
-     * Get weather past 30 days
-     *
-     * @return array
-     */
-    public function getWeatherInfoPast($lat, $long)
-    {
-        $WeatherModel = $this->WeatherModel;
-        $weatherInfo = $WeatherModel->getWeatherMulti($lat, $long);
-        
-        return $weatherInfo;
-
     }
 }

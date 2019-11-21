@@ -18,21 +18,6 @@ class WeatherAPIController implements ContainerInjectableInterface
     use ContainerInjectableTrait;
 
     /**
-     * @var string $active a sample member variable that gets initialised
-     */
-    private $isActive = "not active";
-
-    /**
-     * Sample initialize
-     *
-     * @return void
-     */
-    public function initialize() : void
-    {
-        $this->isActive = "active";
-    }
-
-    /**
      * This is the index method action, it handles:
      * ANY METHOD mountpoint
      * ANY METHOD mountpoint/
@@ -42,6 +27,51 @@ class WeatherAPIController implements ContainerInjectableInterface
      */
     public function indexAction()
     {
-        return __METHOD__ . ", \$isActive is {$this->isActive}";
+        $title = "Weather info";
+        $page = $this->di->get("page");
+        $request = $this->di->get("request");
+
+        $request = $this->di->get("request");
+
+        if ($request->hasGet("location")) {
+            if($request->hasGet("prev", true) && $request->hasGet("days")) {
+                return $this->getWeather($request->getGet("location"), $request->getGet("days"));
+            }
+            return $this->getWeather($request->getGet("location"));
+        } 
+        $page->add("weather/form-json-weather", []);
+        $page->add("weather/api-exemple", []);
+
+        return $page->render([
+            "title" => $title,
+        ]);
     }
+
+    /**
+     * Get weather
+     * Today, and next 7 days or
+     * Previous days
+     *
+     * @return array
+     */
+    public function getWeather($location, $days = null)
+    {
+        $WeatherModel = $this->di->weather;
+        
+        $weatherInfo = [];
+        $convertedLocation = $WeatherModel->convertLocation($location);
+        ini_set( 'serialize_precision', -1 );
+        
+        if ($convertedLocation["match"] && $days !== null) {
+            $weatherInfo = $WeatherModel->getWeatherMulti($convertedLocation["latitude"], $convertedLocation["longitude"], $days);
+        } else if ($convertedLocation["match"] ) {
+            $weatherInfo = $WeatherModel->getWeather($convertedLocation["latitude"], $convertedLocation["longitude"], $days);
+        }
+        return [[
+            "match" => $convertedLocation["match"],
+            "location" => $convertedLocation,
+            "weatherinfo" => $weatherInfo
+        ]];
+    }
+
 }

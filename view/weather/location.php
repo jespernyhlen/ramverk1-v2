@@ -6,8 +6,8 @@ namespace Anax\View;
 
 <div class="ip-result">
 
-<?php if ($location["country"]) : ?>
-  <p><strong>Plats:</strong> <?= $location["display_name"] ?></p>
+<?php if ($location["location_summary"]) : ?>
+  <p><strong>Plats:</strong> <?= $location["location_summary"] ?></p>
 <?php endif; ?>
 
 <?php if ($location["latitude"] && $location["longitude"]) : ?>

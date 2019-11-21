@@ -56,7 +56,7 @@ return [
                     ],
                     [
                         "text" => "API",
-                        "url" => "weather/api",
+                        "url" => "weather/weather-api",
                         "title" => "Väder API",
                     ]
                 ],

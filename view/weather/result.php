@@ -2,7 +2,7 @@
 namespace Anax\View;
 
 ?>
-<h1>Kommande 7 dagar</h1>
+<h1>Väder idag och kommande 7 dagar</h1>
 
 <div class="weather-result">
 <?php if ($weatherinfo) : ?>

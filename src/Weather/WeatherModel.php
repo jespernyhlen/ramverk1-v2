@@ -10,23 +10,34 @@ class WeatherModel
     /**
      * @var string Api key
      * @var string Api base url
+     * @var string Api base options
+     * 
      *
      */
     protected $apiKey;
     protected $baseURL;
+    protected $baseOptions;
+
 
     /**
-     * Get and set APikey from local keyfile
+     * Set Api options
      *
      * @return void
      */
     public function __construct()
     {
-        $key = require ANAX_INSTALL_PATH . "/config/apikey.php";
-        $this->apiKey = $key["darksky"] ?? "";
         $this->baseURL = "https://api.darksky.net/forecast/";
-        $this->baseOptions = "?exclude=currently,hourly,minutely,flags&extend=daily&units=si&lang=sv";
+        $this->baseOptions = "?exclude=currently,hourly,minutely,flags,alerts&extend=daily&units=si&lang=sv";
+    }
 
+    /**
+     * Set Apikey
+     *
+     * @return void
+     */
+    public function setKey($key)
+    {
+        $this->apiKey = $key;
     }
 
     /**
@@ -41,19 +52,18 @@ class WeatherModel
 
         if (!empty($locationInfo)) {
             $res = [];
-            $res["latitude"] = floatval($locationInfo[0]["lat"]);
-            $res["longitude"] = floatval($locationInfo[0]["lon"]);
-            $res["display_name"] = $locationInfo[0]["display_name"] ?? null;
-            $res["place"] = $locationInfo[0]["address"]["hamlet"] ?? null;
-            $res["town"] = $locationInfo[0]["address"]["town"] ?? null;
-            $res["county"] = $locationInfo[0]["address"]["county"] ?? null;
-            $res["state"] = $locationInfo[0]["address"]["state"] ?? null;
-            $res["postcode"] = $locationInfo[0]["address"]["postcode"] ?? null;
-            $res["country"] = $locationInfo[0]["address"]["country"] ?? null;
+            $res["match"] = true;
+            $res["latitude"] = $locationInfo[0]["lat"];
+            $res["longitude"] = $locationInfo[0]["lon"];
+            $res["openstreetmap_link"] = "https://www.openstreetmap.org/#map=10/" . $res['latitude'] . "/" . $res['longitude'];
+            $res["location_summary"] = $locationInfo[0]["display_name"] ?? null;
 
             return $res;
         }
-        return [];
+        return [ 
+                "match" => false,
+                "message" => "Could not find any matching location"
+        ];
     }
 
 
@@ -65,8 +75,10 @@ class WeatherModel
     public function getWeather(int $lat, $long) : array
     {
         $url = $this->baseURL . $this->apiKey . "/" . $lat . "," . $long . $this->baseOptions;
+        $weatherInfo = $this->getCurl($url);
+        $weatherInfo["match"] = (!empty($weatherInfo)) ? true : false;
 
-        return $this->getCurl($url);;
+        return $weatherInfo;
     }
 
     /**
@@ -95,11 +107,17 @@ class WeatherModel
      *
      * @return array
      */
-    public function getWeatherMulti(int $lat, $long) : array
+    public function getWeatherMulti(int $lat, $long, $days) : array
     {
         $url = $this->baseURL . $this->apiKey . "/" . $lat . "," . $long;
         $allRequests = [];
-        for ($i=0; $i < 2; $i++) {
+        if ($days <= 0 || $days > 30) {
+            return [
+                "match" => false,
+                "message" => "Unvalid amount of days."
+            ];
+        }
+        for ($i=1; $i < $days + 1; $i++) {
             $time = time() - ($i * 60 * 60 * 24);
             $allRequests[] = $url . "," . $time . $this->baseOptions;
         }
@@ -114,11 +132,15 @@ class WeatherModel
      */
     public function formatResponse(array $weatherResponse) : array
     {
+
         $newFormat = [];
-        foreach ($weatherResponse as $key => $row) {
-            $newFormat[] = $row["daily"]["data"][0];
+        if (!empty($weatherResponse)) {
+            $newFormat["match"] = true;
+            foreach ($weatherResponse as $key => $row) {
+                $newFormat["data"][] = $row["daily"]["data"][0];
+            }
         }
-      
+
         return $newFormat;
     }
 

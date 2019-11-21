@@ -6,7 +6,7 @@ namespace Anax\View;
 
 <div class="weather-result">
 <?php if ($weatherinfo) : ?>
-  <?php foreach ($weatherinfo["pastweather"] as $key => $row) :
+  <?php foreach ($weatherinfo as $key => $row) :
             echo "<div class='weather-item col-lg-2 col-md-6'>";
             echo "<div><h4>" . date('d/m', $row["time"]) . "</h4></div>";
             echo "<div><h1>" . round($row["apparentTemperatureHigh"]) . "°C" . "</h1></div>";
