@@ -313,6 +313,34 @@ template {
 [hidden] {
   display: none;
 }
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OUuhs.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UNirkOUuhs.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOUuhs.ttf) format('truetype');
+}
 /**
   * Font Awesome.
   */
@@ -5605,7 +5633,7 @@ body {
   padding: 0;
   color: #111;
   background-color: #fff;
-  font: 14px/1.71428571 Verdana, Geneva, sans-serif;
+  font: 14px/1.71428571 'Open Sans', sans-serif;
 }
 h1,
 h2,
@@ -6975,6 +7003,39 @@ input.testroute:hover {
 input.testroute:active,
 input.testroute:focus {
   outline: none;
+}
+.weather-item.col-lg-2.col-md-6 {
+  width: 32.33%;
+  margin: 0.5%;
+  display: inline-table;
+  border: 2px solid #f0f0f0;
+  min-height: 250px;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+.weather-item p,
+.weather-item h1,
+.weather-item h2,
+.weather-item h3,
+.weather-item h4 {
+  border-bottom: 0;
+  margin: 0;
+}
+.weather-item div {
+  margin: 1.3em;
+}
+.weather-item h1 {
+  font-size: 3em;
+  font-weight: 600;
+  padding: 0;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+.weather-min-max {
+  display: flex;
+  justify-content: space-around;
+  font-weight: 700;
 }
 /**
   * Style for games.

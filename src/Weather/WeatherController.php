@@ -17,10 +17,11 @@ class WeatherController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
-    /**
-     * @var string $active a sample member variable that gets initialised
+     /**
+     * @var object $WeatherModel class for weatherinfo
+     *
      */
-    private $isActive = "not active";
+    private $WeatherModel;
 
     /**
      * Sample initialize
@@ -29,7 +30,7 @@ class WeatherController implements ContainerInjectableInterface
      */
     public function initialize() : void
     {
-        $this->isActive = "active";
+        $this->WeatherModel = new WeatherModel();
     }
 
     /**
@@ -42,6 +43,62 @@ class WeatherController implements ContainerInjectableInterface
      */
     public function indexAction()
     {
-        return __METHOD__ . ", \$isActive is {$this->isActive}";
+        $title = "Weather info";
+        $page = $this->di->get("page");
+        $WeatherModel = $this->WeatherModel;
+
+        $request = $this->di->get("request");
+
+        $page->add("weather/form-text-weather", []);
+        $page->add("weather/clear", []);
+
+        if ($this->di->get("request")->hasGet("location")) {
+            $convertedLocation = $WeatherModel->convertLocation($request->getGet("location"));
+            if (!empty($convertedLocation)) {
+
+                $weatherInfo["location"] = $convertedLocation;
+                $weatherInfo["weather"] = $this->getWeatherInfo($convertedLocation["latitude"], $convertedLocation["longitude"]);
+
+                $weatherInfoPast["pastweather"] = $this->getWeatherInfoPast($convertedLocation["latitude"], $convertedLocation["longitude"]);
+                $page->add("weather/location", ["location" => $weatherInfo["location"]]);
+                $page->add("weather/result", ["weatherinfo" => $weatherInfo]);
+                $page->add("weather/resultpast", ["weatherinfo" => $weatherInfoPast]);
+            } else {
+                $page->add("weather/badresult", []);
+            }
+        }
+
+        return $page->render([
+            "title" => $title,
+        ]);
+    }
+
+    /**
+     * Get weather next 7 days
+     *
+     * @return array
+     */
+    public function getWeatherInfo($lat, $long)
+    {
+        $WeatherModel = $this->WeatherModel;
+        $weatherInfo = $WeatherModel->getWeather($lat, $long);
+            // var_dump($weatherInfo["daily"]["data"]);
+
+        return $weatherInfo;
+
+    }
+
+    /**
+     * Get weather past 30 days
+     *
+     * @return array
+     */
+    public function getWeatherInfoPast($lat, $long)
+    {
+        $WeatherModel = $this->WeatherModel;
+        $weatherInfo = $WeatherModel->getWeatherMulti($lat, $long);
+        
+        return $weatherInfo;
+
     }
 }
