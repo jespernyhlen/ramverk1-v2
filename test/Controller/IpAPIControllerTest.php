@@ -53,7 +53,7 @@ class IpAPIControllerTest extends TestCase
             "longitude" => 14.5431995391845703125,
             "openstreetmap_link" => "https://www.openstreetmap.org/#map=10/61.006999969482/14.543199539185",
             "isValid" => true,
-            "domain" => "metro-cust-37-44-205-237.daladatorer.net"
+            "domain" => "37.44.205.237"
         ]];
         $this->assertEquals($exp, $res);
 

@@ -1,18 +1,15 @@
 <?php
 namespace Jen\Weather;
 
-
 /**
  * A model class retrievieng data from an external server.
  */
-class WeatherModel 
-{
+class WeatherModel {
     /**
      * @var object For curl requests
      * @var string Api key
      * @var string Api base url
      * @var string Api options
-     * 
      *
      */
     protected $curl;
@@ -81,7 +78,7 @@ class WeatherModel
 
             return $res;
         }
-        return [ 
+        return [
                 "match" => false,
                 "message" => "Could not find any matching location"
         ];

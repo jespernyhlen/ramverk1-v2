@@ -45,7 +45,7 @@ return [
         ],
         [
             "text" => "Väder",
-            "url" => "weather",
+            "url" => "weather/web",
             "title" => "Väderinformation",
             "submenu" => [
                 "items" => [

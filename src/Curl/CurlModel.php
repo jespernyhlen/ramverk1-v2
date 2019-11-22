@@ -1,7 +1,6 @@
 <?php
 namespace Jen\Curl;
 
-
 /**
  * A model class retrievieng data from an external server.
  */
@@ -69,5 +68,4 @@ class CurlModel
         }
         return $response;
     }
-
 }

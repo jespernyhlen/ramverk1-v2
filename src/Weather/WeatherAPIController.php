@@ -34,11 +34,11 @@ class WeatherAPIController implements ContainerInjectableInterface
         $request = $this->di->get("request");
 
         if ($request->hasGet("location")) {
-            if($request->hasGet("prev", true) && $request->hasGet("days")) {
+            if ($request->hasGet("prev", true) && $request->hasGet("days")) {
                 return $this->getWeather($request->getGet("location"), $request->getGet("days"));
             }
             return $this->getWeather($request->getGet("location"));
-        } 
+        }
         $page->add("weather/form-json-weather", []);
         $page->add("weather/api-exemple", []);
 
@@ -62,11 +62,11 @@ class WeatherAPIController implements ContainerInjectableInterface
         
         $weatherInfo = [];
         $convertedLocation = $WeatherModel->convertLocation($location);
-        ini_set( 'serialize_precision', -1 );
+        ini_set('serialize_precision', -1);
         
         if ($convertedLocation["match"] && $days !== null) {
             $weatherInfo = $WeatherModel->getWeatherMulti($convertedLocation["latitude"], $convertedLocation["longitude"], $days);
-        } else if ($convertedLocation["match"] ) {
+        } else if ($convertedLocation["match"]) {
             $weatherInfo = $WeatherModel->getWeather($convertedLocation["latitude"], $convertedLocation["longitude"], $days);
         }
         return [[
@@ -75,5 +75,4 @@ class WeatherAPIController implements ContainerInjectableInterface
             "weatherinfo" => $weatherInfo
         ]];
     }
-
 }

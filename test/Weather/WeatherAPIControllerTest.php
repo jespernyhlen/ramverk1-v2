@@ -28,7 +28,6 @@ class WeatherAPIControllerTest extends TestCase
         // Setup controllerclass
         $this->controller = new WeatherAPIController();
         $this->controller->setDI($this->di);
-
     }
 
     /**
@@ -106,8 +105,9 @@ class WeatherAPIControllerTest extends TestCase
             
         $this->assertInternalType("array", $res[0]["weatherinfo"]["data"]);
         $this->assertCount( 
-            3, 
-            $res[0]["weatherinfo"]["data"], "testArray doesn't contains 3 elements"
-        ); 
+            3,
+            $res[0]["weatherinfo"]["data"],
+            "testArray doesn't contains 3 elements"
+        );
     }
 }

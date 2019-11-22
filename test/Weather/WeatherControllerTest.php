@@ -28,7 +28,6 @@ class WeatherControllerTest extends TestCase
         // Setup controllerclass
         $this->controller = new WeatherController();
         $this->controller->setDI($this->di);
-
     }
 
     /**
