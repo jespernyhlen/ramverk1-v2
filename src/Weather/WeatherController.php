@@ -30,7 +30,10 @@ class WeatherController implements ContainerInjectableInterface
     {
         $title = "Weather info";
         $page = $this->di->get("page");
-        $WeatherModel = $this->di->weather;
+
+        $CurlModel = $this->di->get("curl");
+        $WeatherModel = $this->di->get("weather");
+        $WeatherModel->setCurl($CurlModel);
 
         $request = $this->di->get("request");
 
