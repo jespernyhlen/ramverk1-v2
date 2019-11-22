@@ -56,7 +56,9 @@ class WeatherAPIController implements ContainerInjectableInterface
      */
     public function getWeather($location, $days = null)
     {
-        $WeatherModel = $this->di->weather;
+        $CurlModel = $this->di->get("curl");
+        $WeatherModel = $this->di->get("weather");
+        $WeatherModel->setCurl($CurlModel);
         
         $weatherInfo = [];
         $convertedLocation = $WeatherModel->convertLocation($location);
