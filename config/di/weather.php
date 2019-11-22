@@ -9,16 +9,18 @@ return [
         "weather" => [
             "shared" => true,
             "callback" => function () {
-                $Weather = new \Jen\Weather\WeatherModel();
+                $weather = new \Jen\Weather\WeatherModel();
 
                 // Load the configuration files
                 $cfg = $this->get("configuration");
                 $config = $cfg->load("apiKey.php");
 
                 // Set Api key
-                $Weather->setKey($config["config"]["darksky"]);
+                $weather->setKey($config["config"]["darksky"]["key"]);
+                $weather->setBaseUrl($config["config"]["darksky"]["baseUrl"]);
+                $weather->setOptions($config["config"]["darksky"]["options"]);
 
-                return $Weather;
+                return $weather;
             }
         ],
     ],
