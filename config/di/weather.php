@@ -13,7 +13,7 @@ return [
 
                 // Load the configuration files
                 $cfg = $this->get("configuration");
-                $config = $cfg->load("apiKey.php");
+                $config = $cfg->load("apikey.php");
 
                 // Set Api key
                 $weather->setKey($config["config"]["darksky"]["key"]);

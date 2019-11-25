@@ -86,6 +86,6 @@ class WeatherControllerTest extends TestCase
 
         // Get body and compare results
         $body = $res->getBody();
-        $this->assertContains("<h3>Kunde inte hitta någon information, pröva en annan plats.</h3>", $body);
+        $this->assertContains("Kunde inte hitta någon information, pröva en annan plats.", $body);
     }
 }

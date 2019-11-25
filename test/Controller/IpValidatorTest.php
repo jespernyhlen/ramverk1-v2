@@ -101,7 +101,7 @@ class IpValidatorTest extends TestCase
         $res3 = $this->validator->getDomain("8.8.8.8");
         $res4 = $this->validator->getDomain("194.47.129.123");
 
-        $this->assertEquals([$res1, $res2, $res3, $res4], ["37.44.205.237", "localhost", "8.8.8.8", "194.47.129.123"]);
+        $this->assertEquals([$res1, $res2, $res3, $res4], ["metro-cust-37-44-205-237.daladatorer.net", "localhost", "dns.google", "abuse.bth.se"]);
     }
 
     /**

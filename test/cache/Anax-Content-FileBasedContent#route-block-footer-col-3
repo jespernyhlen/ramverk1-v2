@@ -1,7 +1,7 @@
-O:8:"stdClass":7:{s:4:"file";s:21:"block/footer-col-3.md";s:7:"section";s:0:"";s:5:"level";i:0;s:8:"internal";b:1;s:7:"tocable";b:0;s:5:"views";a:1:{s:4:"main";a:2:{s:8:"template";s:23:"anax/v2/article/default";s:4:"data";a:2:{s:7:"content";s:252:"<h4>BTH</h4>
+O:8:"stdClass":7:{s:4:"file";s:21:"block/footer-col-3.md";s:7:"section";s:0:"";s:5:"level";i:0;s:8:"internal";b:1;s:7:"tocable";b:0;s:5:"views";a:1:{s:4:"main";a:2:{s:8:"template";s:23:"anax/v2/article/default";s:4:"data";a:2:{s:7:"content";s:176:"<h4>Utveckling</h4>
 
-<p>Blekinge Tekniska Högskola erbjuder en hel hög studier och där bland &#8220;webbprogrammering&#8221;. <a href="https://www.bth.se">Skolans webbplats</a> och mer specifikt <a href="https://dbwebb.se/">dbwebbs egna webbplats</a>.</p>
-";s:7:"excerpt";s:252:"<h4>BTH</h4>
+<p>Sidan uppdateras stadigt och det går att följa genom <a href="https://github.com/jespernyhlen/ramverk1-v2">repot för me/redovisa på GitHub</a>.</p>
+";s:7:"excerpt";s:176:"<h4>Utveckling</h4>
 
-<p>Blekinge Tekniska Högskola erbjuder en hel hög studier och där bland &#8220;webbprogrammering&#8221;. <a href="https://www.bth.se">Skolans webbplats</a> och mer specifikt <a href="https://dbwebb.se/">dbwebbs egna webbplats</a>.</p>
-";}}}s:11:"frontmatter";a:1:{s:5:"title";s:3:"BTH";}}
+<p>Sidan uppdateras stadigt och det går att följa genom <a href="https://github.com/jespernyhlen/ramverk1-v2">repot för me/redovisa på GitHub</a>.</p>
+";}}}s:11:"frontmatter";a:1:{s:5:"title";s:10:"Utveckling";}}
