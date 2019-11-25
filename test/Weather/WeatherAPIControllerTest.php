@@ -104,7 +104,7 @@ class WeatherAPIControllerTest extends TestCase
         $res = $this->controller->indexAction();
             
         $this->assertInternalType("array", $res[0]["weatherinfo"]["data"]);
-        $this->assertCount( 
+        $this->assertCount(
             3,
             $res[0]["weatherinfo"]["data"],
             "testArray doesn't contains 3 elements"

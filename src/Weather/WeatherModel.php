@@ -4,7 +4,8 @@ namespace Jen\Weather;
 /**
  * A model class retrievieng data from an external server.
  */
-class WeatherModel {
+class WeatherModel
+{
     /**
      * @var object For curl requests
      * @var string Api key
