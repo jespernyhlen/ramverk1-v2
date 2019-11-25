@@ -1,3 +1,3 @@
-#### BTH
+#### Utveckling
 
-Blekinge Tekniska Högskola erbjuder en hel hög studier och där bland "webbprogrammering". [Skolans webbplats](https://www.bth.se) och mer specifikt [dbwebbs egna webbplats](https://dbwebb.se/).
+Sidan uppdateras stadigt och det går att följa genom [repot för me/redovisa på GitHub](https://github.com/jespernyhlen/ramverk1-v2).

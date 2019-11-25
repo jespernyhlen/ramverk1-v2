@@ -2,16 +2,16 @@
  * Typographic defaults.
  */
 // Magic number and base fontsize
-@magicNumber:  24px;  // 22px
+@magicNumber: 24px; // 22px
 @fontSizeBody: 16px;
 
 // Default font-families
-@fontFamilyHeadings: "serif";
-@fontFamilyBody:     "sans-serif";
-@fontFamilyCode:     "monospace";
+@fontFamilyHeadings: 'serif';
+@fontFamilyBody: 'sans-serif';
+@fontFamilyCode: 'monospace';
 
 // header h1-h6 font sixe
-@fontSizeH1: 2.375em;
+@fontSizeH1: 2em;
 @fontSizeH2: 1.875em;
 @fontSizeH3: 1.75em;
 @fontSizeH4: 1.5em;
@@ -20,11 +20,11 @@
 
 // header h1-h6 borders
 @colorH1BorderBottom: #666;
-@colorH2BorderBottom: #CCC;
-@colorH3BorderBottom: #EEE;
-@colorH4BorderBottom: #EEE;
-@colorH5BorderBottom: #EEE;
-@colorH6BorderBottom: #EEE;
+@colorH2BorderBottom: #ccc;
+@colorH3BorderBottom: #eee;
+@colorH4BorderBottom: #eee;
+@colorH5BorderBottom: #eee;
+@colorH6BorderBottom: #eee;
 @borderSizeH1: 1px;
 @borderSizeH2: 1px;
 @borderSizeH3: 1px;
@@ -34,65 +34,67 @@
 
 // fontsize code blocks
 //@fontSizeCodeInline:  1.25em;
-@fontSizeCodeBlock:   1.0em;
+@fontSizeCodeBlock: 1em;
 @lineHeightCodeBlock: 1.5;
 
- // fontsize super and subscripts
- @fontSizeSupSub: 0.75em;
+// fontsize super and subscripts
+@fontSizeSupSub: 0.75em;
 
- // fontsize smaller
- @fontSizeSmall: 0.875em;
+// fontsize smaller
+@fontSizeSmall: 0.875em;
 
 @colorTypographyMark: #000;
-@bgColorTypographyMark:  #ff9;
+@bgColorTypographyMark: #ff9;
 
 @colorBlockquoteBorder: #eee;
 @sizeBlockquoteBorder: 4px;
 
 @borderColorCodeInline: #ccc;
-@bgColorCodeInline:     #eee;
-@bgColorCodeBlock:      #eee;
-@colorCodeBlockBorder:  #ccc;
-@borderSizeCodeblock:   1px;
+@bgColorCodeInline: #eee;
+@bgColorCodeBlock: #eee;
+@colorCodeBlockBorder: #ccc;
+@borderSizeCodeblock: 1px;
 
-@colorTableHeaderBorder:    #aaa;
-@sizeTableHeaderBorder:     2px;
-@bgColorTableStripe:        #fafafa;
-@colorTableRowBorder:       #ccc;
-@colorTableRowHover:        #000;
-@bgColorTableRowHover:      #f6f6f6;
-@colorTableRowBorderHover:  #666;
+@colorTableHeaderBorder: #aaa;
+@sizeTableHeaderBorder: 2px;
+@bgColorTableStripe: #fafafa;
+@colorTableRowBorder: #ccc;
+@colorTableRowHover: #000;
+@bgColorTableRowHover: #f6f6f6;
+@colorTableRowBorderHover: #666;
 
 @bgColorHr: #fff;
 
-
-
 #desinax-hgrid {
-
     /**
      * Mixins used when setting default fonts
      */
     .showGrid(@gridImage) {
-        background-image: url("@{gridImage}");
+        background-image: url('@{gridImage}');
     }
 
     .showGridAlt(@gridColor: #f4e3d7) {
-        background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent (@magicNumber - 1), @gridColor (@magicNumber - 1), @gridColor @magicNumber);
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent (@magicNumber - 1),
+            @gridColor (@magicNumber - 1),
+            @gridColor @magicNumber
+        );
     }
 
     .font(@fontSize: 100.01%, @fontFamily: @fontFamilyBody) {
-        font: @fontSize/unit((@magicNumber / @fontSizeBody)) @fontFamily;
+        font: @fontSize / unit((@magicNumber / @fontSizeBody)) @fontFamily;
     }
 
     .fontSize(@fontSize) {
         font-size: @fontSize;
         @lineHeightBase: unit((@magicNumber / @fontSizeBody));
-        line-height: @lineHeightBase / unit(@fontSize) * ceil(unit(@fontSize) / @lineHeightBase );
+        line-height: @lineHeightBase / unit(@fontSize) *
+            ceil(unit(@fontSize) / @lineHeightBase);
     }
 
     // 5/4 for smaller font-size, incremental leading.
-
-
 
     /**
      * Settings for headings H1-H6
@@ -116,7 +118,7 @@
         h1 {
             #desinax-hgrid.fontSize(@fontSizeH1);
 
-            font-weight: normal;
+            font-weight: 600;
             border-bottom: @borderSizeH1 solid @colorH1BorderBottom;
             margin-bottom: @magicNumber - @borderSizeH1;
 
@@ -191,14 +193,12 @@
         }
     }
 
-
-
     /**
      * Text elements
      */
     .typographyTextElements() {
         p {
-            margin-bottom: @magicNumber;
+            margin-bottom: @magicNumber / 2;
         }
 
         small,
@@ -251,8 +251,6 @@
             margin-bottom: @magicNumber;
         }
     }
-
-
 
     /**
      * Display source code.
@@ -308,8 +306,6 @@
             background-color: @bgColorCodeBlock;
         }
     }
-
-
 
     /**
      * Lists
@@ -371,8 +367,6 @@
             margin-left: 1.5em;
         }
     }
-
-
 
     /**
      * Tables. Because of the need for padding on TH and TD, the vertical rhythm
@@ -449,8 +443,6 @@
         }
     }
 
-
-
     /**
      * More typography elements
      */
@@ -460,12 +452,17 @@
             top: -2px;
             border: 0;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            background-image: linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0.75),
+                rgba(0, 0, 0, 0)
+            );
             margin-top: 1.5 * @magicNumber - 1px;
             margin-bottom: 1.5 * @magicNumber;
 
             &::after {
-                content: "§";
+                content: '§';
                 position: relative;
                 top: -0.7em;
                 left: 50%;
@@ -475,17 +472,15 @@
         }
     }
 
-
-
     /**
      * Enable all default typographic elements.
      */
-     .activateDefaultTypography() {
-         #desinax-hgrid.typographyHeadings();
-         #desinax-hgrid.typographyTextElements();
-         #desinax-hgrid.typographyCodeElements();
-         #desinax-hgrid.typographyListElements();
-         #desinax-hgrid.typographyTableElements();
-         #desinax-hgrid.typographyOtherElements();
-     }
+    .activateDefaultTypography() {
+        #desinax-hgrid.typographyHeadings();
+        #desinax-hgrid.typographyTextElements();
+        #desinax-hgrid.typographyCodeElements();
+        #desinax-hgrid.typographyListElements();
+        #desinax-hgrid.typographyTableElements();
+        #desinax-hgrid.typographyOtherElements();
+    }
 }

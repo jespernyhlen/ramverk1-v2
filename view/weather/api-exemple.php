@@ -3,17 +3,17 @@ namespace Anax\View;
 
 ?>
 <h1>API Dokumentation</h1>
-<p>APIet tar emot get-requests till <code>/weather-api</code> med en plats <code>?location={plats}</code>.</p>
-<p>Ett svar returneras i JSON-format med relevant information om platsen, samt vädret idag och 7 dagar framåt.</p>
-<p>För en mer specifik sökning separeras söksträngen med <code>,</code> Exempel: <code>/weather-api?location=norge,oslo</code></p>
+<p>APIet tar emot get-requests till <code>/weather-api</code> med en plats <code>?location={plats}</code>.<br>
+Ett svar returneras i JSON-format med relevant information om platsen, samt vädret idag och 7 dagar framåt.<br>
+För en mer specifik sökning separeras söksträngen med <code>,</code> Exempel: <code>/weather-api?location=norge,oslo</code></p>
 <code><strong>Get</strong> /weather-api?location={plats}</code>
 <h4>Optionella parametrar</h4>
 <p>För att få historisk väderdata används parametrarna <code>?prev=true&days={antal dagar}</code> i tillägg till plats. Minimum 1 dag och maximalt 30 dagar tillbaka visar prognosen.</p>
 
 <code><strong>Get</strong> /weather-api?location={plats}&prev=true&days={antal dagar}</code>
 <h4>Exempel (utan optionella parametrar)</h4>
-<code><strong>Get</strong> /weather-api?location=umeå</code>
-<p><a href="./weather-api?location=umeå">/weather-api?location=umeå</a></p>
+<p><code><strong>Get</strong> /weather-api?location=umeå</code><br>
+<a href="./weather-api?location=umeå">/weather-api?location=umeå</a></p>
 
 <pre><code>{
     "match": true,
@@ -84,8 +84,8 @@ namespace Anax\View;
 
 <h4>Exempel (Med optionella parametrar)</h4>
 
-<code><strong>Get</strong> /weather-api?location=umeå&prev=true&days=4</code>
-<p><a href="./weather-api?location=umeå&prev=true&days=4">/weather-api?location=umeå&prev=true&days=4</a></p>
+<p><code><strong>Get</strong> /weather-api?location=umeå&prev=true&days=4</code><br>
+<a href="./weather-api?location=umeå&prev=true&days=4">/weather-api?location=umeå&prev=true&days=4</a></p>
 
 <pre><code>{
     "match": true,

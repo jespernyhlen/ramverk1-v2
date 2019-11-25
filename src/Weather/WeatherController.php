@@ -45,7 +45,7 @@ class WeatherController implements ContainerInjectableInterface
             if ($convertedLocation["match"]) {
                 $weatherInfo["location"] = $convertedLocation;
                 $weatherInfo["weather"] = $WeatherModel->getWeather($convertedLocation["latitude"], $convertedLocation["longitude"]);
-                $weatherInfoPast = $WeatherModel->getWeatherMulti($convertedLocation["latitude"], $convertedLocation["longitude"], 3);
+                $weatherInfoPast = $WeatherModel->getWeatherMulti($convertedLocation["latitude"], $convertedLocation["longitude"], 30);
 
                 $page->add("weather/location", ["location" => $weatherInfo["location"]]);
                 $page->add("weather/result", ["weatherinfo" => $weatherInfo]);

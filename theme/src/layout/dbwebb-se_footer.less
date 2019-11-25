@@ -1,24 +1,26 @@
 /**
  * A footer style for dbwebb.se.
  */
-@bgColorFooter: @bgColorHtml;
-@colorFooterWrapper: #ddd;
-@colorFooter: #aaa;
+@bgColorFooter: #f3f3f4;
+@colorFooterWrapper: #555;
+@colorFooter: #555;
 @borderFooter: #777;
-@borderColor: #666;
+@borderColor: #eee;
 
 .outer-wrap-footer {
     background-color: @bgColorFooter;
     padding-top: @magicNumber;
-    padding-bottom: @magicNumber * 2;
+    padding-bottom: @magicNumber;
+    border-top: 1px solid #e9e9e9;
+    background: #f3f3f4;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.02);
 }
 
 .footer-column-wrapper {
     color: @colorFooterWrapper;
-    border-bottom: 1px solid @borderColor;
-    padding-bottom: @magicNumber;
-    margin-bottom: @magicNumber * 2;
-    
+    border-bottom: 2px solid @borderColor;
+    margin-bottom: @magicNumber;
+
     ul {
         list-style: none;
         margin: 0;
@@ -27,6 +29,10 @@
 
     a {
         color: inherit;
+    }
+
+    h4 {
+        color: #000;
     }
 }
 
@@ -48,7 +54,6 @@
 .site-footer {
     color: @colorFooter;
     text-align: center;
-    padding-bottom: @magicNumber;
 
     ul {
         margin: 0;
@@ -58,9 +63,9 @@
 
     li {
         display: inline-block;
-        
+
         &::after {
-            content: " • ";
+            content: ' • ';
         }
 
         &:last-child::after {
@@ -79,7 +84,7 @@
         padding-right: 0;
     }
 
-    .footer-column, {
+    .footer-column {
         #desinax-vgrid.column(@columns);
     }
 
