@@ -23,7 +23,7 @@ class IpGeoInfoModel
      */
     public function __construct()
     {
-        $key = require ANAX_INSTALL_PATH . "/config/apikey.php";
+        $key = require ANAX_INSTALL_PATH . "/config/key_ipstack.php";
         $this->apiKey = $key["ipstack"] ?? "";
         $this->baseURL = "http://api.ipstack.com/";
     }
