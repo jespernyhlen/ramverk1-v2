@@ -4,7 +4,7 @@
  */
 return [
     "darksky" => [
-        "key" =>"YOUR_API_KEY",
+        "key" =>"YOUR_KEY",
         "baseUrl" => "https://api.darksky.net/forecast/",
         "options" => "?exclude=currently,hourly,minutely,flags,alerts&extend=daily&units=si&lang=sv",
     ]

@@ -23,6 +23,9 @@ class WeatherAPIControllerTest extends TestCase
         $di->loadServices(ANAX_INSTALL_PATH . "/config/di");
         $di->loadServices(ANAX_INSTALL_PATH . "/test/config/di");
 
+        // Use different cache dir for unit test
+        $di->get('cache')->setPath(ANAX_INSTALL_PATH . "/test/cache");
+
         // Setup controllerclass
         $this->controller = new WeatherAPIController();
         $this->controller->setDI($this->di);
