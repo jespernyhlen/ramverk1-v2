@@ -15,7 +15,7 @@
     },
     "require": {
         "anax/anax-ramverk1-me": "^1.0.0",
-        "jespernyhlen/weather-module": "^1.0"
+        "jespernyhlen/weather-module": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"

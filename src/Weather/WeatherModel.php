@@ -1,11 +1,16 @@
 <?php
 namespace Anax\Weather;
 
+use Anax\Commons\ContainerInjectableInterface;
+use Anax\Commons\ContainerInjectableTrait;
+
 /**
  * A model class retrievieng data from an external server.
  */
-class WeatherModel
+class WeatherModel implements ContainerInjectableInterface
 {
+    use ContainerInjectableTrait;
+    
     /**
      * @var object For curl requests
      * @var string Api key
@@ -14,11 +19,9 @@ class WeatherModel
      *
      */
     protected $curl;
-
     protected $apiKey;
     protected $baseURL;
     protected $options;
-
     /**
      * Set Curl object for requests
      *
@@ -28,7 +31,6 @@ class WeatherModel
     {
         $this->curl = $curl;
     }
-
     /**
      * Set Apikey
      *
@@ -38,7 +40,6 @@ class WeatherModel
     {
         $this->apiKey = $key;
     }
-
     /**
      * Set baseUrl
      *
@@ -48,7 +49,6 @@ class WeatherModel
     {
         $this->baseURL = $baseURL;
     }
-
     /**
      * Set options
      *
@@ -58,7 +58,6 @@ class WeatherModel
     {
         $this->options = $options;
     }
-
     /**
      * Get latitude, longitude from location
      *
@@ -68,7 +67,6 @@ class WeatherModel
     {
         $url = "https://nominatim.openstreetmap.org/?addressdetails=1&q={$location}&format=json&email=asdf@hotmail.se&limit=1";
         $locationInfo = $this->curl->getCurl($url);
-
         if (!empty($locationInfo)) {
             $res = [];
             $res["match"] = true;
@@ -76,7 +74,6 @@ class WeatherModel
             $res["longitude"] = $locationInfo[0]["lon"];
             $res["openstreetmap_link"] = "https://www.openstreetmap.org/#map=10/" . $res['latitude'] . "/" . $res['longitude'];
             $res["location_summary"] = $locationInfo[0]["display_name"] ?? null;
-
             return $res;
         }
         return [
@@ -84,7 +81,6 @@ class WeatherModel
                 "message" => "Could not find any matching location"
         ];
     }
-
     /**
      * Get weather
      *
@@ -95,10 +91,8 @@ class WeatherModel
         $url = $this->baseURL . $this->apiKey . "/" . $lat . "," . $long . $this->options;
         $weatherInfo = $this->curl->getCurl($url);
         $weatherInfo["match"] = (!empty($weatherInfo)) ? true : false;
-
         return $weatherInfo;
     }
-
     /**
      * Get weather mulitcurl
      *
@@ -121,7 +115,6 @@ class WeatherModel
         $formatedResponse = $this->formatResponse($this->curl->getMultiCurl($allRequests));
         return $formatedResponse;
     }
-
     /**
      * Format weather response
      *
@@ -129,6 +122,7 @@ class WeatherModel
      */
     public function formatResponse(array $weatherResponse) : array
     {
+
         $newFormat = [];
         if (!empty($weatherResponse)) {
             $newFormat["match"] = true;
@@ -136,7 +130,6 @@ class WeatherModel
                 $newFormat["data"][] = $row["daily"]["data"][0];
             }
         }
-
         return $newFormat;
     }
 }

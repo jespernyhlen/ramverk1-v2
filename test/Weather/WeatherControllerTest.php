@@ -26,6 +26,8 @@ class WeatherControllerTest extends TestCase
         // Use different cache dir for unit test
         $di->get('cache')->setPath(ANAX_INSTALL_PATH . "/test/cache");
 
+        $di->setShared("weather", "\Anax\Weather\WeatherModelMock");
+
         // Setup controllerclass
         $this->controller = new WeatherController();
         $this->controller->setDI($this->di);

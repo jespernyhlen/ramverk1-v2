@@ -25,6 +25,8 @@ class WeatherAPIControllerTest extends TestCase
 
         // Use different cache dir for unit test
         $di->get('cache')->setPath(ANAX_INSTALL_PATH . "/test/cache");
+        
+        $di->setShared("weather", "\Anax\Weather\WeatherModelMock");
 
         // Setup controllerclass
         $this->controller = new WeatherAPIController();
@@ -76,18 +78,17 @@ class WeatherAPIControllerTest extends TestCase
      */
     public function testIndexActionGetLocation()
     {
-        $this->di->get("request")->setGet("location", "sverige,mora");
+        $this->di->get("request")->setGet("location", "malung");
 
         // Test action
         $res = $this->controller->indexAction();
         $exp = [
             "match" => true,
-            "latitude" => "61.1428413",
-            "longitude" => "14.4176333790821",
-            "openstreetmap_link" => "https://www.openstreetmap.org/#map=10/61.1428413/14.4176333790821",
-            "location_summary" => "Mora kommun, Dalarnas län, Svealand, Sverige"
+            "latitude" => "60.6864461",
+            "longitude" => "13.7145867",
+            "openstreetmap_link" => "https://www.openstreetmap.org/#map=10/60.6864461/13.7145867",
+            "location_summary" => 'Malung, Malung-Sälens kommun, Dalarnas län, Svealand, 78231, Sverige'
         ];
-            
         $this->assertEquals($exp, $res[0]["location"]);
         $this->assertInternalType("array", $res[0]["weatherinfo"]["daily"]["data"]);
     }
@@ -99,16 +100,16 @@ class WeatherAPIControllerTest extends TestCase
     {
         $this->di->get("request")->setGet("location", "sverige,mora");
         $this->di->get("request")->setGet("prev", true);
-        $this->di->get("request")->setGet("days", 3);
+        $this->di->get("request")->setGet("days", 4);
 
         // Test action
         $res = $this->controller->indexAction();
+        // print_r($res);
             
         $this->assertInternalType("array", $res[0]["weatherinfo"]["data"]);
         $this->assertCount(
-            3,
-            $res[0]["weatherinfo"]["data"],
-            "testArray doesn't contains 3 elements"
+            4,
+            $res[0]["weatherinfo"]["data"]
         );
     }
 }
