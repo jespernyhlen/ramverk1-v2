@@ -104,20 +104,24 @@ input.testroute:focus {
     font-weight: 700;
 }
 
-input[type='submit'] {
+input[type='submit'],
+input[type='reset'] {
     padding: 2px 24px 4px;
     border-radius: 3px;
     background: #daf1ff;
     border: 1px solid #cecece;
 }
 
-input[type='submit']:hover {
+input[type='submit']:hover,
+input[type='reset']:hover {
     background: #eee;
     cursor: pointer;
 }
 
 input[type='submit']:active,
-input[type='submit']:focus {
+input[type='submit']:focus,
+input[type='reset']:active,
+input[type='reset']:focus {
     outline: 0;
 }
 
@@ -159,6 +163,46 @@ pre code {
 
 .no-border {
     border-bottom: 0 !important;
+}
+
+#book-table {
+    // font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #eee;
+    text-align: center;
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.06);
+}
+
+#book-table td,
+#book-table th {
+    border-bottom: 1px solid #eee;
+    padding: 8px;
+}
+
+#book-table tr:nth-child(even) {
+    background-color: #f6f6f68c;
+}
+
+#book-table tr:hover {
+    background-color: #efefef;
+}
+
+#book-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #222;
+    color: white;
+}
+
+#book-table img {
+    max-height: 150px;
+    max-width: 140px;
+}
+
+.htmlform fieldset {
+    padding: 0.5em 0;
+    border: 0;
 }
 
 @media screen and (max-width: 800px) {

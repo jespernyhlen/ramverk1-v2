@@ -16,6 +16,7 @@
                 <directory>src/StyleChooser</directory>
                 <directory>src/Page</directory>
                 <directory>src/Navigation</directory>
+                <directory>src/Book</directory>
                 <file>src/function.php</file>
             </exclude>
         </whitelist>
